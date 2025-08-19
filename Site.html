@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operação Sentinela – Mentoria Militar</title>
+  <meta name="description" content="Operação Sentinela: mentoria militar com aulas, treinamentos, orientação documental, simulados e rede de apoio. Prepare-se para o serviço e a carreira militar." />
+  <meta name="theme-color" content="#102a43" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;           /* fundo base (azul noite) */
+      --panel:#111a2b;        /* painéis */
+      --muted:#8aa4bf;        /* texto suave */
+      --text:#e8f0fa;         /* texto principal */
+      --brand:#18a47a;        /* verde-oliva moderno */
+      --brand-2:#2e7d32;      /* verde escuro */
+      --accent:#2b5db9;       /* azul real */
+      --warn:#ffd166;         /* destaque */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-lg: 28px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+    .btn{display:inline-flex; align-items:center; gap:.6rem; border:0; cursor:pointer; padding:14px 18px; border-radius:999px; font-weight:700; letter-spacing:.2px; transition:.25s ease; text-decoration:none}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),#21c096); color:#062014; box-shadow:0 10px 24px rgba(24,164,122,.35)}
+    .btn-primary:hover{transform:translateY(-2px); filter:saturate(1.1)}
+    .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,.15)}
+    .badge{display:inline-flex; gap:.5rem; align-items:center; font-size:.9rem; padding:8px 12px; border-radius:999px; background:rgba(39,174,96,.12); color:#a7f3d0; border:1px solid rgba(39,174,96,.25)}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.1) blur(8px); background:rgba(11,18,32,.72); border-bottom:1px solid rgba(255,255,255,.05)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    /* logo AGORA é a própria <img>, então estilizamos como bloco fixo */
+    .brand .logo{
+      width:44px; height:44px;
+      border-radius:12px;            /* arredondado como no original */
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.08);
+      object-fit:cover;              /* preenche bem o quadrado */
+      display:block;
+      background:#0d1425;            /* fallback */
+    }
+    .brand h1{font-size:1.1rem; margin:0; letter-spacing:.3px}
+    nav ul{display:flex; gap:18px; list-style:none; padding:0; margin:0}
+    nav a{opacity:.9}
+    nav a:hover{opacity:1}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+    .menu-btn{display:none; background:transparent; border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:10px}
+
+    /* Mobile menu */
+    #mobileMenu{display:none;}
+    #mobileMenu.open{display:block;}
+    #mobileMenu a{display:block; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.06)}
+
+    /* Hero */
+    .hero{position:relative; padding:80px 0 60px; overflow:hidden}
+    .hero::before{content:""; position:absolute; inset:-20% -10% auto -10%; height:120%; background:radial-gradient(1200px 600px at 80% -10%, rgba(43,93,185,.22), transparent), radial-gradient(1200px 600px at 20% 110%, rgba(24,164,122,.18), transparent)}
+    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center}
+    .headline{font-size:clamp(1.8rem, 4vw, 3rem); line-height:1.1; margin:.6rem 0 1rem}
+    .kicker{color:var(--muted)}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:18px; border-radius:var(--radius-lg); box-shadow:var(--shadow)}
+    .hero-bullets{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:16px 0 0}
+    .hero-bullets li{display:flex; gap:10px; align-items:flex-start}
+
+    /* Sections */
+    section{padding:64px 0; border-top:1px solid rgba(255,255,255,.06)}
+    .section-head{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px}
+    .section-head h2{margin:0; font-size:clamp(1.2rem,3vw,1.8rem)}
+    .grid-3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+    .grid-4{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.07); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    .card h3{margin:.2rem 0 .4rem; font-size:1.05rem}
+    .muted{color:var(--muted)}
+
+    /* Pricing */
+    .pricing{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+    .price-card{position:relative}
+    .price{font-size:2rem; font-weight:800}
+    .price small{font-weight:400; opacity:.8}
+    .featured{border-color:rgba(33,192,150,.8); box-shadow:0 16px 40px rgba(33,192,150,.18)}
+
+    /* Timeline */
+    .steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px}
+    .step{position:relative; padding-top:8px}
+    .step .idx{width:36px; height:36px; border-radius:999px; background:linear-gradient(135deg,var(--accent),#77a4ff); display:grid; place-items:center; font-weight:800}
+
+    /* Impact list */
+    .impact li{display:flex; gap:10px; align-items:flex-start; margin:8px 0}
+
+    /* FAQ */
+    details{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:14px; margin:10px 0}
+    summary{cursor:pointer; font-weight:700}
+
+    /* Footer */
+    footer{padding:40px 0 60px; border-top:1px solid rgba(255,255,255,.06); color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-4{grid-template-columns:1fr 1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .pricing{grid-template-columns:1fr}
+      nav ul{display:none}
+      .menu-btn{display:inline-flex}
+    }
+    @media (max-width: 560px){
+      .grid-4{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <!-- SUBSTITUIÇÃO DO LOGO -->
+        <img class="logo" src="Logo.png.jpg" alt="Operação Sentinela - logomarca"/>
+        <!-- TROCA DO NOME -->
+        <h1>Operação Sentinela</h1>
+      </div>
+      <nav aria-label="principal">
+        <ul>
+          <li><a href="#inicio">Home</a></li>
+          <li><a href="#problema">Sobre</a></li>
+          <li><a href="#como-funciona">Como Funciona</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#impacto">Impacto</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="#planos">Ver Planos</a>
+        <a class="btn btn-primary" href="#contato">Quero Participar</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#cfe8ff" stroke-width="1.6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="container">
+      <a href="#inicio">Home</a>
+      <a href="#problema">Sobre</a>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#planos">Planos</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </header>
+<style>
+    .planos-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 50px 0;
+    }
+
+    .plano {
+        background: #1a1a1a;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        width: 300px;
+        color: white;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .plano:hover {
+        transform: translateY(-10px);
+    }
+
+    .plano h2 {
+        margin-bottom: 15px;
+        font-size: 24px;
+        color: #00ffcc;
+    }
+
+    .plano p {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .plano ul {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .plano ul li {
+        margin-bottom: 10px;
+    }
+
+    .plano button {
+        background: #00ffcc;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .plano button:hover {
+        background: #00cc99;
+    }
+</style>
+
+  <!-- Hero -->
+  <main id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">Preparando jovens para o serviço e a carreira militar</span>
+        <h2 class="headline">Ajudamos quem sonha em vestir a farda a chegar mais preparado para conquistar seu lugar.</h2>
+        <p class="kicker">Mentoria conduzida por recrutas e ex-militares com aulas, treinos, orientação documental, simulados e rede de apoio.</p>
+        <div style="display:flex; gap:12px; margin-top:16px">
+          <a class="btn btn-primary" href="#contato">Quero Ser Mentorando</a>
+          <a class="btn btn-ghost" href="#como-funciona">Saiba Mais</a>
+        </div>
+        <ul class="hero-bullets" aria-label="Destaques" style="margin-top:20px">
+        </ul>
+      </div>
+      <div class="hero-card">
+        <img class="Jovem" src="Sem título-3.png" alt="Jovens em treinamento" style="border-radius:16px; border:1px solid rgba(255,255,255,.08)">
+        <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+          <span class="badge" style="background:rgba(43,93,185,.15); color:#cfe8ff; border-color:rgba(43,93,185,.35)">Informação clara</span>
+          <span class="badge">Disciplina e foco</span>
+          <span class="badge" style="background:rgba(255,209,102,.12); color:#ffe9ae; border-color:rgba(255,209,102,.35)">Mentoria acessível</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Problema & Oportunidade -->
+  <section id="problema">
+    <div class="container">
+      <div class="section-head">
+        <h2>O desafio e a oportunidade</h2>
+        <span class="muted">Janelas que abrem caminho para sua aprovação</span>
+      </div>
+      <div class="grid-4">
+        <div class="card"><h3>Falta de informação</h3><p class="muted">Processos seletivos militares pouco claros geram dúvidas e atrasos.</p></div>
+        <div class="card"><h3>Acesso e qualidade</h3><p class="muted">Orientação confiável é escassa ou cara para muitos jovens.</p></div>
+        <div class="card"><h3>Preparo insuficiente</h3><p class="muted">Sem treino físico e mental adequado, a desistência aumenta.</p></div>
+        <div class="card"><h3>Mercado em expansão</h3><p class="muted">Mais de 300 mil alistamentos/ano e interesse crescente pela carreira.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solução -->
+  <section id="solucao">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nossa solução</h2>
+        <span class="muted">Mentoria completa, prática e acessível</span>
+      </div>
+      <div class="grid-4">
+        <div class="card"><h3>📚 Aulas híbridas</h3><p class="muted">Online e presenciais, do básico ao avançado.</p></div>
+        <div class="card"><h3>🏃 Treinamento</h3><p class="muted">Planos físicos e mentais com acompanhamento.</p></div>
+        <div class="card"><h3>📄 Documentação</h3><p class="muted">Orientação burocrática e checklist de prazos.</p></div>
+        <div class="card"><h3>📝 Simulados</h3><p class="muted">Bancos de questões e materiais exclusivos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section id="como-funciona">
+    <div class="container">
+      <div class="section-head">
+        <h2>Como funciona</h2>
+        <span class="muted">Do primeiro contato à sua aprovação</span>
+      </div>
+      <div class="steps">
+        <div class="card step"><div class="idx">1</div><h3>Captação</h3><p class="muted">Redes sociais e escolas para alcançar quem quer vestir a farda.</p></div>
+        <div class="card step"><div class="idx">2</div><h3>Mentoria premium</h3><p class="muted">Acompanhamento individual e treinos específicos.</p></div>
+        <div class="card step"><div class="idx">3</div><h3>Networking</h3><p class="muted">Rede com recrutas, ex-militares e profissionais.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impacto Social -->
+  <section id="impacto">
+    <div class="container">
+      <div class="section-head">
+        <h2>Impacto social</h2>
+        <span class="muted">Disciplina que transforma realidades</span>
+      </div>
+      <ul class="impact" style="padding-left:0; list-style:none">
+        <li>🎯 Democratizar o acesso à carreira militar</li>
+        <li>📈 Aumentar a taxa de aprovação</li>
+        <li>💪 Estimular disciplina, saúde física e mental</li>
+        <li>🤲 Oportunidades para jovens de baixa renda</li>
+      </ul>
+    </div>
+  </section>
+
+<section id="planos">
+    <h1 style="text-align:center; margin-bottom:40px;">Nossos Planos</h1>
+    <div class="planos-container">
+        
+        <!-- Plano Básico -->
+        <div class="plano">
+            <h2>Plano Básico</h2>
+            <p>R$100/mês</p>
+            <ul>
+                <li>✔ Mentoria em grupo online</li>
+                <li>✔ Acesso ao conteúdo gravado</li>
+                <li>✔ Grupo de estudos e desafios</li>
+                <li>✔ Simulados teóricos</li>
+                <li>✔ Acompanhamento físico básico</li>
+            </ul>
+            <button>Quero o Básico</button>
+        </div>
+
+        <!-- Plano Premium -->
+        <div class="plano">
+            <h2>Plano Premium</h2>
+            <p>R$200/mês</p>
+            <ul>
+                <li>✔ Mentoria em grupo online</li>
+                <li>✔ Acesso ao conteúdo gravado</li>
+                <li>✔ Grupo de estudos e desafios</li>
+                <li>✔ Simulados teóricos</li>
+                <li>✔ Acompanhamento físico básico</li>
+                <li>✔ Avaliação física personalizada</li>
+                <li>✔ Plano de treino individual</li>
+                <li>✔ Acesso à rede de academias (SmartFit)</li>
+                <li>✔ Sessões 1:1 com mentor militar</li>
+                <li>✔ Preparação psicológica e mental</li>
+                <li>✔ Workshops e eventos exclusivos</li>
+                <li>✔ Kit de treino exclusivo</li>
+            </ul>
+            <button>Quero o Premium</button>
+        </div>
+
+    </div>
+</section>
+
+
+
+  <!-- Operação -->
+  <section id="operacao">
+    <div class="container">
+      <div class="section-head">
+        <h2>Operação & Assistente Administrativo</h2>
+        <span class="muted">Organização que sustenta o crescimento</span>
+      </div>
+      <div class="grid-4">
+        <div class="card"><h3>Cadastros & Inscrições</h3><p class="muted">Gestão de dados dos mentorandos e status de matrícula.</p></div>
+        <div class="card"><h3>Parcerias & Escolas</h3><p class="muted">Relacionamento com academias e instituições de ensino.</p></div>
+        <div class="card"><h3>Indicadores de Impacto</h3><p class="muted">Taxa de aprovação, assiduidade e evolução física.</p></div>
+        <div class="card"><h3>Comunicação</h3><p class="muted">Suporte e canais de contato oficiais.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos">
+    <div class="container">
+      <div class="section-head">
+        <h2>Quem passou fala</h2>
+        <span class="muted">Resultados que inspiram</span>
+      </div>
+      <div class="grid-3">
+        <div class="card"><p>“Entrei inseguro e saí aprovado no exame físico. A mentoria mudou meu foco.”</p><p class="muted">— João, SP</p></div>
+        <div class="card"><p>“Os simulados e a orientação documental evitaram atrasos e erros.”</p><p class="muted">— Ana, PE</p></div>
+        <div class="card"><p>“Treino mensal e acompanhamento me deram disciplina.”</p><p class="muted">— Lucas, MG</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Dúvidas frequentes</h2>
+        <span class="muted">Tudo o que você precisa saber para começar</span>
+      </div>
+      <details>
+        <summary>Como faço para me alistar?</summary>
+        <p> O alistamento militar pode ser feito acessando o site oficial alistamento.eb.mil.br
+        , onde é necessário preencher um formulário com seus dados pessoais. O período para alistamento online vai de 1º de janeiro a 30 de junho do ano em que o cidadão completa 18 anos. Também é possível realizar o alistamento presencialmente na Junta de Serviço Militar da sua cidade.</p>
+      </details>
+      <details>
+        <summary>Qual é o valor da multa por atraso no alistamento?</summary>
+        <p> Em 2025, o valor da multa para quem realizar o alistamento militar fora do prazo é de R$6,38.</p>
+      </details>
+      <details>
+        <summary>Por quanto tempo se serve no serviço militar?</summary>
+        <p> O tempo de serviço varia conforme a modalidade. No Tiro de Guerra, o período costuma ser de 9 a 10 meses. Já nos quartéis, o serviço obrigatório dura, em geral, 1 ano. Caso o militar deseje permanecer e seja selecionado para a carreira, o tempo de engajamento pode chegar a 8 anos ou mais.</p>
+      </details>
+      <details>
+        <summary>Como posso ingressar nas Forças Armadas?</summary>
+        <p> O ingresso nas Forças Armadas como carreira é feito por meio de concurso público. Ou seja, é necessário passar por um processo seletivo que inclui provas escritas e outras etapas eliminatórias, de acordo com cada força (Exército, Marinha ou Aeronáutica).</p>
+      </details>
+      <details>
+        <summary>5. O serviço militar é obrigatório mesmo se eu não quiser servir?</summary>
+        <p> O alistamento militar é obrigatório para todos os cidadãos brasileiros do sexo masculino ao completarem 18 anos. No entanto, o serviço militar em si (ou seja, ser incorporado às Forças Armadas) depende de diversos fatores, como a necessidade de efetivo, seleção médica e avaliações. Portanto, nem todos os alistados são convocados para servir.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA Final + Contato -->
+  <section id="contato">
+    <div class="container">
+      <div class="section-head" style="align-items:flex-start; gap:14px">
+        <div>
+          <h2>Com a Operação Sentinela, a disciplina começa antes da farda.</h2>
+          <p class="muted" style="max-width:700px">Junte-se a nós para formar a próxima geração de militares preparados e conscientes. Preencha o formulário e receba seu plano inicial gratuito.</p>
+        </div>
+      </div>
+      <div class="grid-3" style="grid-template-columns:1.2fr .8fr .8fr">
+        <form id="leadForm" class="card" aria-label="Formulário de inscrição">
+          <label>Nome completo<br><input type="text" name="nome" required placeholder="Seu nome" style="width:100%; margin-top:6px; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0e1526; color:var(--text)"></label>
+          <div style="height:10px"></div>
+          <label>E-mail<br><input type="email" name="email" required placeholder="seu@email.com" style="width:100%; margin-top:6px; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0e1526; color:var(--text)"></label>
+          <div style="height:10px"></div>
+          <label>Cidade/UF<br><input type="text" name="cidade" placeholder="Ex.: Recife/PE" style="width:100%; margin-top:6px; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0e1526; color:var(--text)"></label>
+          <div style="height:10px"></div>
+          <!-- continue seu formulário aqui -->
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2025 Operação Sentinela</div>
+  </footer>
+</body>
+</html>
